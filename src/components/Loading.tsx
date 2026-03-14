@@ -2,36 +2,46 @@ import { useEffect, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
 
-import Marquee from "react-fast-marquee";
-
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
   const [loaded, setLoaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
-    setTimeout(() => {
-      setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
-    }, 600);
-  }
+  useEffect(() => {
+    let timer1: ReturnType<typeof setTimeout>;
+    let timer2: ReturnType<typeof setTimeout>;
+
+    if (percent >= 100) {
+      timer1 = setTimeout(() => {
+        setLoaded(true);
+
+        timer2 = setTimeout(() => {
+          setIsLoaded(true);
+        }, 1000);
+      }, 600);
+    }
+
+    return () => {
+      if (timer1) clearTimeout(timer1);
+      if (timer2) clearTimeout(timer2);
+    };
+  }, [percent]);
 
   useEffect(() => {
+    if (!isLoaded) return;
+
     import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
-          setIsLoading(false);
-        }, 900);
-      }
+      setClicked(true);
+
+      setTimeout(() => {
+        if (module.initialFX) {
+          module.initialFX();
+        }
+        setIsLoading(false);
+      }, 900);
     });
-  }, [isLoaded]);
+  }, [isLoaded, setIsLoading]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;
@@ -46,9 +56,10 @@ const Loading = ({ percent }: { percent: number }) => {
     <>
       <div className="loading-header">
         <a href="/#" className="loader-title" data-cursor="disable">
-          RC
+          SD
         </a>
-        <div className={`loaderGame ${clicked && "loader-out"}`}>
+
+        <div className={`loaderGame ${clicked ? "loader-out" : ""}`}>
           <div className="loaderGame-container">
             <div className="loaderGame-in">
               {[...Array(27)].map((_, index) => (
@@ -59,19 +70,26 @@ const Loading = ({ percent }: { percent: number }) => {
           </div>
         </div>
       </div>
+
       <div className="loading-screen">
         <div className="loading-marquee">
-          <Marquee>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-          </Marquee>
+          <div className="loading-marquee-text">
+            <span>Software Developer</span>
+            <span>AI Automation Builder</span>
+            <span>Entrepreneur</span>
+            <span>Software Developer</span>
+            <span>AI Automation Builder</span>
+            <span>Entrepreneur</span>
+          </div>
         </div>
+
         <div
-          className={`loading-wrap ${clicked && "loading-clicked"}`}
-          onMouseMove={(e) => handleMouseMove(e)}
+          className={`loading-wrap ${clicked ? "loading-clicked" : ""}`}
+          onMouseMove={handleMouseMove}
         >
           <div className="loading-hover"></div>
-          <div className={`loading-button ${loaded && "loading-complete"}`}>
+
+          <div className={`loading-button ${loaded ? "loading-complete" : ""}`}>
             <div className="loading-container">
               <div className="loading-content">
                 <div className="loading-content-in">
@@ -80,8 +98,9 @@ const Loading = ({ percent }: { percent: number }) => {
               </div>
               <div className="loading-box"></div>
             </div>
+
             <div className="loading-content2">
-              <span>Welcome</span>
+              <span>Welcome Sanskar</span>
             </div>
           </div>
         </div>
@@ -93,18 +112,19 @@ const Loading = ({ percent }: { percent: number }) => {
 export default Loading;
 
 export const setProgress = (setLoading: (value: number) => void) => {
-  let percent: number = 0;
+  let percent = 0;
 
   let interval = setInterval(() => {
     if (percent <= 50) {
-      let rand = Math.round(Math.random() * 5);
-      percent = percent + rand;
+      const rand = Math.round(Math.random() * 5);
+      percent += rand;
       setLoading(percent);
     } else {
       clearInterval(interval);
       interval = setInterval(() => {
-        percent = percent + Math.round(Math.random());
+        percent += Math.round(Math.random());
         setLoading(percent);
+
         if (percent > 91) {
           clearInterval(interval);
         }
@@ -131,5 +151,6 @@ export const setProgress = (setLoading: (value: number) => void) => {
       }, 2);
     });
   }
+
   return { loaded, percent, clear };
 };

@@ -23,35 +23,52 @@ const Navbar = () => {
     smoother.scrollTop(0);
     smoother.paused(true);
 
-    let links = document.querySelectorAll(".header ul a");
-    links.forEach((elem) => {
-      let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
+    const links = document.querySelectorAll(".header ul a");
+
+    const handleClick = (e: Event) => {
+      if (window.innerWidth > 1024) {
+        e.preventDefault();
+        const elem = e.currentTarget as HTMLAnchorElement;
+        const section = elem.getAttribute("data-href");
+        if (section) {
           smoother.scrollTo(section, true, "top top");
         }
-      });
+      }
+    };
+
+    links.forEach((elem) => {
+      elem.addEventListener("click", handleClick);
     });
-    window.addEventListener("resize", () => {
+
+    const handleResize = () => {
       ScrollSmoother.refresh(true);
-    });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      links.forEach((elem) => {
+        elem.removeEventListener("click", handleClick);
+      });
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
+
   return (
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          RC
+          SD
         </a>
+
         <a
-          href="mailto:rajeshchittyal21@gmail.com"
+          href="mailto:sanskardevidas@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
-          rajeshchittyal21@gmail.com
+          sanskardevidas@gmail.com
         </a>
+
         <ul>
           <li>
             <a data-href="#about" href="#about">

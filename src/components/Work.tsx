@@ -5,34 +5,40 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "Solid Starters",
-    category: "Low-Code Platform",
-    tools: "Angular, Next.js, NestJS, MongoDB",
-    image: "/images/Solidx.png",
+    title: "AI Resume Review Bot",
+    category: "AI Automation Project",
+    tools: "n8n, OpenAI API, Google Drive, Workflow Automation",
+    image: "/images/project1.png",
   },
   {
-    title: "Radix",
-    category: "E-Commerce",
-    tools: "Angular, Next.js, NestJS, CMS",
-    image: "/images/radix.png",
+    title: "YouTube Content Automation System",
+    category: "Content Automation",
+    tools: "n8n, AI Script Generation, Video Workflow, Automation",
+    image: "/images/project2.png",
   },
   {
-    title: "Bond Cancellation",
-    category: "Import-Export Automation",
-    tools: "Angular, Next.js, NestJS, Workflows",
-    image: "/images/bond.png",
+    title: "Personal Brand Booster",
+    category: "AI SaaS Tool",
+    tools: "React.js, Node.js, OpenAI API, Tailwind CSS",
+    image: "/images/project3.png",
   },
   {
-    title: "Sapphire",
-    category: "CRM Platform",
-    tools: "AngularJS, NestJS, PostgreSQL",
-    image: "/images/sapphire.png",
+    title: "IoT Platform",
+    category: "Interactive Web Project",
+    tools: "Odoo, JavaScript, UI Design, Embedded Media",
+    image: "/images/project4.png",
   },
   {
-    title: "Mpro",
-    category: "Insurance Platform",
-    tools: "React.js, Node.js, Microservices",
-    image: "/images/Maxlife.png",
+    title: "Blumyn Brand Website",
+    category: "Brand Website",
+    tools: "Website Development, UI Design, Product Branding",
+    image: "/images/project5.png",
+  },
+  {
+    title: "Restaurant Website Development",
+    category: "Business Website",
+    tools: "React.js, UI Design, Responsive Development",
+    image: "/images/project6.png",
   },
 ];
 
@@ -70,7 +76,6 @@ const Work = () => {
         </h2>
 
         <div className="carousel-wrapper">
-          {/* Navigation Arrows */}
           <button
             className="carousel-arrow carousel-arrow-left"
             onClick={goToPrev}
@@ -79,6 +84,7 @@ const Work = () => {
           >
             <MdArrowBack />
           </button>
+
           <button
             className="carousel-arrow carousel-arrow-right"
             onClick={goToNext}
@@ -88,7 +94,6 @@ const Work = () => {
             <MdArrowForward />
           </button>
 
-          {/* Slides */}
           <div className="carousel-track-container">
             <div
               className="carousel-track"
@@ -101,19 +106,20 @@ const Work = () => {
                   <div className="carousel-content">
                     <div className="carousel-info">
                       <div className="carousel-number">
-                        <h3>0{index + 1}</h3>
+                        <h3>{String(index + 1).padStart(2, "0")}</h3>
                       </div>
+
                       <div className="carousel-details">
                         <h4>{project.title}</h4>
-                        <p className="carousel-category">
-                          {project.category}
-                        </p>
+                        <p className="carousel-category">{project.category}</p>
+
                         <div className="carousel-tools">
                           <span className="tools-label">Tools & Features</span>
                           <p>{project.tools}</p>
                         </div>
                       </div>
                     </div>
+
                     <div className="carousel-image-wrapper">
                       <WorkImage image={project.image} alt={project.title} />
                     </div>
@@ -123,13 +129,13 @@ const Work = () => {
             </div>
           </div>
 
-          {/* Dot Indicators */}
           <div className="carousel-dots">
             {projects.map((_, index) => (
               <button
                 key={index}
-                className={`carousel-dot ${index === currentIndex ? "carousel-dot-active" : ""
-                  }`}
+                className={`carousel-dot ${
+                  index === currentIndex ? "carousel-dot-active" : ""
+                }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to project ${index + 1}`}
                 data-cursor="disable"
