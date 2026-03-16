@@ -5,7 +5,7 @@ Do check it out!
 
 ## Instructions 🛠️
 
-I have modified the gsap club plugins with the trial plugins, but with the trial plugin you cannot host it🔴. So for Club plugins, Check out here: sanskardevidas-portfolio.vercel.app
+I have modified the gsap club plugins with the trial plugins, but with the trial plugin you cannot host it🔴. So for Club plugins, Check out here: [sanskardevidas-portfolio.vercel.app](https://sanskardevidas-portfolio.vercel.app/)
 
 **Techstack** - React, TypeScript, GSAP, ThreeJS, WebGL, HTML, Css, JavaScript
 
