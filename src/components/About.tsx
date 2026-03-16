@@ -2,30 +2,47 @@ import "./styles/About.css";
 
 const About = () => {
   return (
-    <div className="about-section" id="about">
+    <section className="about-section" id="about">
       <div className="about-me">
-        <h3 className="title">About Me</h3>
 
-        <p className="para">
-          I am Sanskar Devidas Dherange, a Computer Science student and passionate
-          software developer focused on AI technology, automation systems, and
-          modern web development.
+        <h3 className="about-title">
+          ABOUT <span>ME</span>
+        </h3>
+
+        <p className="about-intro">
+          Hello, I'm <span className="highlight">Sanskar Devidas Dherange</span> — a
+          Computer Science student and passionate developer building
+          <span className="highlight"> AI-powered systems</span>,
+          automation workflows, and modern web applications.
         </p>
 
-        <p className="para">
-          I enjoy building technology-driven solutions including AI automation
-          workflows, intelligent agents, and full-stack web applications using
-          tools like React.js, Node.js, APIs, and AI platforms.
+        <p className="about-text">
+          My focus is on creating intelligent solutions using technologies like
+          <span className="tech"> React.js</span>,
+          <span className="tech"> Node.js</span>,
+          <span className="tech"> APIs</span>, and
+          <span className="tech"> AI platforms</span>.
+          I love designing systems that automate tasks, improve productivity,
+          and deliver real-world impact.
         </p>
 
-        <p className="para">
-          I have built multiple projects such as AI Resume Review Bots, YouTube
-          automation systems, personal brand AI tools, and business websites.
-          My goal is to create impactful products and innovative companies that
-          combine technology, creativity, and entrepreneurship.
+        <p className="about-text">
+          I have built projects such as
+          <span className="highlight"> AI Resume Review Bots</span>,
+          <span className="highlight"> YouTube Automation Systems</span>,
+          and
+          <span className="highlight"> AI tools for personal brands</span>.
         </p>
+
+        <p className="about-text last">
+          My mission is to build innovative products and companies that merge
+          <span className="highlight"> technology</span>,
+          <span className="highlight"> creativity</span>, and
+          <span className="highlight"> entrepreneurship</span>.
+        </p>
+
       </div>
-    </div>
+    </section>
   );
 };
 
